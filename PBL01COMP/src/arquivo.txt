@@ -1,2 +1,1 @@
-boooL /t este ,123.asffs ,.[]{}{{-*-- bool a
-456 
+y t b oooL ///t extenDs bOOL COnsT function false float if inT procedure print return scan start string struct THEN truE typeDEF vAr wHILe este .asffs ,.[]{}{{-*-- bool a

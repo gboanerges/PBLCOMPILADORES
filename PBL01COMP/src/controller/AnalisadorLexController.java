@@ -27,9 +27,12 @@ public class AnalisadorLexController {
                 iterador++;
 
             } else if (arquivoLido.charAt(iterador) == '+' || arquivoLido.charAt(iterador) == '-' || arquivoLido.charAt(iterador) == '*' || arquivoLido.charAt(iterador) == '/') {
+
                 System.out.printf("OP ARIT:%c\n", arquivoLido.charAt(iterador));
+                lexema += arquivoLido.charAt(iterador);
+
                 if (arquivoLido.charAt(iterador) == '/') {
-                    lexema += arquivoLido.charAt(iterador);
+                   
                     iterador++;
                     if (arquivoLido.charAt(iterador) == '/') {
                         lexema += arquivoLido.charAt(iterador);
@@ -47,11 +50,8 @@ public class AnalisadorLexController {
                         }
                     }
                 } else {
-                    
-                    lexema = "";
                     iterador++;
                 }
-
             } else if (Character.isAlphabetic(arquivoLido.charAt(iterador))) {
                 System.out.printf("\nPRIMEIRA LETRA:%c\n", arquivoLido.charAt(iterador));
                 lexema += arquivoLido.charAt(iterador);
@@ -125,7 +125,7 @@ public class AnalisadorLexController {
     }
 
     public boolean palavrasReservadas(String lexema) {
-        return lexema.matches("[bB][oO]{2}[lL]|[cC][oO][nN][sS][tT]|");
+        return lexema.matches("[bB][oO]{2}[lL]|[cC][oO][nN][sS][tT]|[eE][lL][sS][eE]|[eE][xX][tT][eE][nN][dD][sS]|[fF][aA][lL][sS][eE]|[fF][lL][oO][aA][tT]|[fF][uU][nN][cC][tT][iI][oO][nN]|[iI][fF]|[iI][nN][tT]|[pP][rR][iI][nN][tT]|[pP][rR][oO][cC][eE][dD][uU][rR][eE]|[rR][eE][tT][uU][rR][nN]|[sS][cC][aA][nN]|[sS][tT][aA][rR][tT]|[sS][tT][rR][iI][nN][gG]|[sS][tT][rR][uU][cC][tT]|[tT][hH][eE][nN]|[tT][rR][uU][eE]|[tT][yY][pP][eE][dD][eE][fF]|[vV][aA][rR]|[wW][hH][iI][lL][eE]");
     }
 
     public boolean identificadores(String lexema) {
