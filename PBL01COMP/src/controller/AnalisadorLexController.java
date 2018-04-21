@@ -32,24 +32,46 @@ public class AnalisadorLexController {
                 lexema += arquivoLido.charAt(iterador);
 
                 if (arquivoLido.charAt(iterador) == '/') {
-                   
+
                     iterador++;
                     if (arquivoLido.charAt(iterador) == '/') {
                         lexema += arquivoLido.charAt(iterador);
                         System.out.printf("COMENTARIO DE LINHA:%s\n", lexema);
                         lexema = "";
+                        while (iterador < arquivoLido.length()) {
+                            if (arquivoLido.charAt(iterador) != '\n') {
+                                iterador++;
+                            } else {
+                                System.out.println("QUEBRA DE LINHA");
+                                lexema = "";
+                                break;
+                            }
+                        }
                         iterador++;
                     } else if (arquivoLido.charAt(iterador) == '*') {
+                        lexema += arquivoLido.charAt(iterador);
+                        System.out.printf("COMENTARIO DE BLOCO:%s\n", lexema);
+
                         while (iterador < arquivoLido.length()) {
                             if (arquivoLido.charAt(iterador) == '*') {
+                                iterador++;
+                                
                                 if (arquivoLido.charAt(iterador) == '/') {
-
+                                    
+                                    lexema += arquivoLido.charAt(iterador - 1);
+                                    lexema += arquivoLido.charAt(iterador);
+                                    System.out.printf("FECHA COMENTARIO DE BLOCO:%s\n", lexema);
+                                    lexema = "";
+                                    break;
                                 }
                             }
                             iterador++;
+
                         }
+                        iterador++;
                     }
                 } else {
+                    lexema = "";
                     iterador++;
                 }
             } else if (Character.isAlphabetic(arquivoLido.charAt(iterador))) {
@@ -75,12 +97,14 @@ public class AnalisadorLexController {
 
                     } else {
                         System.out.printf("ACHOU ALGO QUE NAO EH LETRA/DIGITO/_:%c\n", arquivoLido.charAt(iterador));
-                        iterador++;
+
                         break;
                     }
 
                 }
+                System.out.printf("lexema after while:%s\n", lexema);
                 if (palavrasReservadas(lexema)) {
+
                     System.out.printf("palavraRes:%s\n", lexema);
                     lexema = "";
                 } else if (identificadores(lexema)) {
