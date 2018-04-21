@@ -162,6 +162,10 @@ public class AnalisadorLexController {
                             iterador++;
                         }
                         break;
+                    case '*':
+                        lexema = "";
+                        iterador++;
+                        break;
                     default:
                         lexema = "";
                         iterador++;
@@ -183,6 +187,26 @@ public class AnalisadorLexController {
                     }
 
                 } else if (arquivoLido.charAt(iterador) == '=') {
+                    iterador++;
+                    if (arquivoLido.charAt(iterador) == '=') {
+                        lexema += arquivoLido.charAt(iterador);
+                        System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
+                        lexema = "";
+                        iterador++;
+                    } else {
+                        lexema = "";
+                    }
+                } else if (arquivoLido.charAt(iterador) == '<') {
+                    iterador++;
+                    if (arquivoLido.charAt(iterador) == '=') {
+                        lexema += arquivoLido.charAt(iterador);
+                        System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
+                        lexema = "";
+                        iterador++;
+                    } else {
+                        lexema = "";
+                    }
+                } else if (arquivoLido.charAt(iterador) == '>') {
                     iterador++;
                     if (arquivoLido.charAt(iterador) == '=') {
                         lexema += arquivoLido.charAt(iterador);
