@@ -1,3 +1,5 @@
-a t b oooL ///t extenDs wat
+a t b4241 oooL ///t extenDs wat
  bOOL /*COn//sT/ functi/on 
-false float if inT .asff*/-s ,.[]{}{{-*--- bool ++ a
+false float if inT .asff*/-s ,.[]{}{{-*--- bool ++ &a& consta 
+&&& var2/ !!= ==
+==|||=

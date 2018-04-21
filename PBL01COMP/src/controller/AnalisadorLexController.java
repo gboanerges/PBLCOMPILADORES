@@ -24,81 +24,6 @@ public class AnalisadorLexController {
                 System.out.println("BARRA N");
                 iterador++;
 
-            } else if (arquivoLido.charAt(iterador) == ';' || arquivoLido.charAt(iterador) == ',' || arquivoLido.charAt(iterador) == '(' || arquivoLido.charAt(iterador) == ')' || arquivoLido.charAt(iterador) == '[' || arquivoLido.charAt(iterador) == ']' || arquivoLido.charAt(iterador) == '{' || arquivoLido.charAt(iterador) == '}' || arquivoLido.charAt(iterador) == '.') {
-                System.out.printf("DELIMITADOR:%c\n", arquivoLido.charAt(iterador));
-                iterador++;
-
-            } else if (arquivoLido.charAt(iterador) == '+' || arquivoLido.charAt(iterador) == '-' || arquivoLido.charAt(iterador) == '*' || arquivoLido.charAt(iterador) == '/') {
-
-                System.out.printf("OP ARIT:%c\n", arquivoLido.charAt(iterador));
-                lexema += arquivoLido.charAt(iterador);
-
-                if (arquivoLido.charAt(iterador) == '+') {
-                    iterador++;
-                    if (arquivoLido.charAt(iterador) == '+') {
-                        lexema += arquivoLido.charAt(iterador);
-                        System.out.printf("DUPLO OP ARIT:%s\n", lexema);
-                        lexema = "";
-                        iterador++;
-                    } else {
-                        lexema = "";
-
-                    }
-                } else if (arquivoLido.charAt(iterador) == '-') {
-                    iterador++;
-                    if (arquivoLido.charAt(iterador) == '-') {
-                        lexema += arquivoLido.charAt(iterador);
-                        System.out.printf("DUPLO OP ARIT:%s\n", lexema);
-                        lexema = "";
-                        iterador++;
-
-                    } else {
-                        lexema = "";
-
-                    }
-                } else if (arquivoLido.charAt(iterador) == '/') {
-
-                    iterador++;
-                    if (arquivoLido.charAt(iterador) == '/') {
-                        lexema += arquivoLido.charAt(iterador);
-                        System.out.printf("COMENTARIO DE LINHA:%s\n", lexema);
-                        lexema = "";
-                        while (iterador < arquivoLido.length()) {
-                            if (arquivoLido.charAt(iterador) != '\n') {
-                                iterador++;
-                            } else {
-                                System.out.println("QUEBRA DE LINHA");
-                                lexema = "";
-                                break;
-                            }
-                        }
-                        iterador++;
-                    } else if (arquivoLido.charAt(iterador) == '*') {
-                        lexema += arquivoLido.charAt(iterador);
-                        System.out.printf("COMENTARIO DE BLOCO:%s\n", lexema);
-
-                        while (iterador < arquivoLido.length()) {
-                            if (arquivoLido.charAt(iterador) == '*') {
-                                iterador++;
-
-                                if (arquivoLido.charAt(iterador) == '/') {
-
-                                    lexema += arquivoLido.charAt(iterador - 1);
-                                    lexema += arquivoLido.charAt(iterador);
-                                    System.out.printf("FECHA COMENTARIO DE BLOCO:%s\n", lexema);
-                                    lexema = "";
-                                    break;
-                                }
-                            }
-                            iterador++;
-
-                        }
-                        iterador++;
-                    }
-                } else {
-                    lexema = "";
-                    iterador++;
-                }
             } else if (Character.isAlphabetic(arquivoLido.charAt(iterador))) {
                 System.out.printf("\nPRIMEIRA LETRA:%c\n", arquivoLido.charAt(iterador));
                 lexema += arquivoLido.charAt(iterador);
@@ -167,6 +92,142 @@ public class AnalisadorLexController {
                     System.out.printf("numero:%s\n", lexema);
                     lexema = "";
                 }
+            } else if (arquivoLido.charAt(iterador) == '+' || arquivoLido.charAt(iterador) == '-' || arquivoLido.charAt(iterador) == '*' || arquivoLido.charAt(iterador) == '/') {
+
+                System.out.printf("OP ARIT:%c\n", arquivoLido.charAt(iterador));
+                lexema += arquivoLido.charAt(iterador);
+
+                switch (arquivoLido.charAt(iterador)) {
+                    case '+':
+                        iterador++;
+                        if (arquivoLido.charAt(iterador) == '+') {
+                            lexema += arquivoLido.charAt(iterador);
+                            System.out.printf("DUPLO OP ARIT:%s\n", lexema);
+                            lexema = "";
+                            iterador++;
+                        } else {
+                            lexema = "";
+
+                        }
+                        break;
+                    case '-':
+                        iterador++;
+                        if (arquivoLido.charAt(iterador) == '-') {
+                            lexema += arquivoLido.charAt(iterador);
+                            System.out.printf("DUPLO OP ARIT:%s\n", lexema);
+                            lexema = "";
+                            iterador++;
+
+                        } else {
+                            lexema = "";
+
+                        }
+                        break;
+                    case '/':
+                        iterador++;
+                        if (arquivoLido.charAt(iterador) == '/') {
+                            lexema += arquivoLido.charAt(iterador);
+                            System.out.printf("COMENTARIO DE LINHA:%s\n", lexema);
+                            lexema = "";
+                            while (iterador < arquivoLido.length()) {
+                                if (arquivoLido.charAt(iterador) != '\n') {
+                                    iterador++;
+                                } else {
+                                    System.out.println("QUEBRA DE LINHA");
+                                    lexema = "";
+                                    break;
+                                }
+                            }
+                            iterador++;
+                        } else if (arquivoLido.charAt(iterador) == '*') {
+                            lexema += arquivoLido.charAt(iterador);
+                            System.out.printf("COMENTARIO DE BLOCO:%s\n", lexema);
+
+                            while (iterador < arquivoLido.length()) {
+                                if (arquivoLido.charAt(iterador) == '*') {
+                                    iterador++;
+
+                                    if (arquivoLido.charAt(iterador) == '/') {
+
+                                        lexema += arquivoLido.charAt(iterador - 1);
+                                        lexema += arquivoLido.charAt(iterador);
+                                        System.out.printf("FECHA COMENTARIO DE BLOCO:%s\n", lexema);
+                                        lexema = "";
+                                        break;
+                                    }
+                                }
+                                iterador++;
+
+                            }
+                            iterador++;
+                        }
+                        break;
+                    default:
+                        lexema = "";
+                        iterador++;
+                        break;
+                }
+            } else if (arquivoLido.charAt(iterador) == '!' || arquivoLido.charAt(iterador) == '=' || arquivoLido.charAt(iterador) == '<' || arquivoLido.charAt(iterador) == '>') {
+                System.out.printf("OP RELACIONAL:%c\n", arquivoLido.charAt(iterador));
+                lexema += arquivoLido.charAt(iterador);
+
+                if (arquivoLido.charAt(iterador) == '!') {
+                    iterador++;
+                    if (arquivoLido.charAt(iterador) == '=') {
+                        lexema += arquivoLido.charAt(iterador);
+                        System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
+                        lexema = "";
+                        iterador++;
+                    } else {
+                        lexema = "";
+                    }
+
+                } else if (arquivoLido.charAt(iterador) == '=') {
+                    iterador++;
+                    if (arquivoLido.charAt(iterador) == '=') {
+                        lexema += arquivoLido.charAt(iterador);
+                        System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
+                        lexema = "";
+                        iterador++;
+                    } else {
+                        lexema = "";
+                    }
+                } else {
+                    lexema = "";
+                }
+            } // Verifica e-comercial
+            else if (arquivoLido.charAt(iterador) == '&') {
+                System.out.printf("E COMERCIAL:%c\n", arquivoLido.charAt(iterador));
+                lexema += arquivoLido.charAt(iterador);
+                iterador++;
+                if (arquivoLido.charAt(iterador) == '&') {
+                    lexema += arquivoLido.charAt(iterador);
+                    System.out.printf("OP LOGICO:%s\n", lexema);
+                    lexema = "";
+                    iterador++;
+                } else {
+                    System.out.println("OP LOG MAL FORMADO &&");
+                    lexema = "";
+
+                }
+            } else if (arquivoLido.charAt(iterador) == '|') {
+                System.out.printf("MODULO:%c\n", arquivoLido.charAt(iterador));
+                lexema += arquivoLido.charAt(iterador);
+                iterador++;
+                if (arquivoLido.charAt(iterador) == '|') {
+                    lexema += arquivoLido.charAt(iterador);
+                    System.out.printf("OP LOGICO:%s\n", lexema);
+                    lexema = "";
+                    iterador++;
+                } else {
+                    System.out.println("OP LOG MAL FORMADO |");
+                    lexema = "";
+
+                }
+            } else if (arquivoLido.charAt(iterador) == ';' || arquivoLido.charAt(iterador) == ',' || arquivoLido.charAt(iterador) == '(' || arquivoLido.charAt(iterador) == ')' || arquivoLido.charAt(iterador) == '[' || arquivoLido.charAt(iterador) == ']' || arquivoLido.charAt(iterador) == '{' || arquivoLido.charAt(iterador) == '}' || arquivoLido.charAt(iterador) == '.') {
+                System.out.printf("DELIMITADOR:%c\n", arquivoLido.charAt(iterador));
+                iterador++;
+
             } else {
                 iterador++;
             }
@@ -185,11 +246,6 @@ public class AnalisadorLexController {
     public boolean numero(String lexema) {
 
         return lexema.matches("[-]?[ ]*[0-9][0-9]*[[.]0-9[0-9]*]");
-    }
-
-    public boolean delimitadores(String lexema) {
-
-        return lexema.matches(";|,");
     }
 
 }
