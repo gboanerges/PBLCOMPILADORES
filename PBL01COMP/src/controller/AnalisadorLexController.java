@@ -17,9 +17,11 @@ public class AnalisadorLexController {
         int iterador = 0;
         do {
             if (arquivoLido.charAt(iterador) == ' ') {
+                System.out.println("ESPACO");
                 iterador++;
 
             } else if (arquivoLido.charAt(iterador) == '\n') {
+                System.out.println("BARRA N");
                 iterador++;
 
             } else if (arquivoLido.charAt(iterador) == ';' || arquivoLido.charAt(iterador) == ',' || arquivoLido.charAt(iterador) == '(' || arquivoLido.charAt(iterador) == ')' || arquivoLido.charAt(iterador) == '[' || arquivoLido.charAt(iterador) == ']' || arquivoLido.charAt(iterador) == '{' || arquivoLido.charAt(iterador) == '}' || arquivoLido.charAt(iterador) == '.') {
@@ -31,7 +33,30 @@ public class AnalisadorLexController {
                 System.out.printf("OP ARIT:%c\n", arquivoLido.charAt(iterador));
                 lexema += arquivoLido.charAt(iterador);
 
-                if (arquivoLido.charAt(iterador) == '/') {
+                if (arquivoLido.charAt(iterador) == '+') {
+                    iterador++;
+                    if (arquivoLido.charAt(iterador) == '+') {
+                        lexema += arquivoLido.charAt(iterador);
+                        System.out.printf("DUPLO OP ARIT:%s\n", lexema);
+                        lexema = "";
+                        iterador++;
+                    } else {
+                        lexema = "";
+
+                    }
+                } else if (arquivoLido.charAt(iterador) == '-') {
+                    iterador++;
+                    if (arquivoLido.charAt(iterador) == '-') {
+                        lexema += arquivoLido.charAt(iterador);
+                        System.out.printf("DUPLO OP ARIT:%s\n", lexema);
+                        lexema = "";
+                        iterador++;
+
+                    } else {
+                        lexema = "";
+
+                    }
+                } else if (arquivoLido.charAt(iterador) == '/') {
 
                     iterador++;
                     if (arquivoLido.charAt(iterador) == '/') {
@@ -55,9 +80,9 @@ public class AnalisadorLexController {
                         while (iterador < arquivoLido.length()) {
                             if (arquivoLido.charAt(iterador) == '*') {
                                 iterador++;
-                                
+
                                 if (arquivoLido.charAt(iterador) == '/') {
-                                    
+
                                     lexema += arquivoLido.charAt(iterador - 1);
                                     lexema += arquivoLido.charAt(iterador);
                                     System.out.printf("FECHA COMENTARIO DE BLOCO:%s\n", lexema);

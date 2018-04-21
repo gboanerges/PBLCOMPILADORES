@@ -1,3 +1,3 @@
 a t b oooL ///t extenDs wat
- bOOL /*COnsT/ functi/on 
-false float if inT .asff*/-s ,.[]{}{{-*-- bool a
+ bOOL /*COn//sT/ functi/on 
+false float if inT .asff*/-s ,.[]{}{{-*--- bool ++ a
