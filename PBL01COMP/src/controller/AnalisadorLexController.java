@@ -244,12 +244,16 @@ public class AnalisadorLexController {
                                         System.out.printf("FECHA COMENTARIO DE BLOCO:%s\n", lexema);
                                         lexema = "";
                                         break;
+                                    } else {
+                                        System.out.println("COMENTARIO DE BLOCO NAO FECHADO");
                                     }
                                 }
                                 iterador++;
 
                             }
                             iterador++;
+                        } else {
+                            lexema = "";
                         }
                         break;
                     case '*':
@@ -344,49 +348,52 @@ public class AnalisadorLexController {
 
             } else if (arquivoLido.charAt(iterador) == '"') {
                 System.out.printf("INICIO CADEIA CARACTERES:%c\n", arquivoLido.charAt(iterador));
-                //lexema += arquivoLido.charAt(iterador);
+                lexema += arquivoLido.charAt(iterador);
                 iterador++;
                 while (iterador < arquivoLido.length()) {
-                    System.out.println("WHILE CARACTERES");
+                    System.out.println("WHILE CC");
                     if (arquivoLido.charAt(iterador) == '"') {
                         System.out.println("FECHA CADEIA CARACTERES");
+                        lexema += arquivoLido.charAt(iterador);
                         iterador++;
                         break;
-                    } else {
-                        System.out.printf("NAO EH ASPA:%c\n", arquivoLido.charAt(iterador));
-                        if (Character.isAlphabetic(arquivoLido.charAt(iterador))) {
-                            System.out.printf("CC LETRA:%c\n", arquivoLido.charAt(iterador));
-                            lexema += arquivoLido.charAt(iterador);
-                            iterador++;
-                        } else if (Character.isDigit(arquivoLido.charAt(iterador))) {
-                            System.out.printf("CC DIGITO:%c\n", arquivoLido.charAt(iterador));
-                            lexema += arquivoLido.charAt(iterador);
-                            iterador++;
-                        } else if (arquivoLido.charAt(iterador) == '\\') {
-                            System.out.printf("CC \\:%c\n", arquivoLido.charAt(iterador));
-                            lexema += arquivoLido.charAt(iterador);
-                            iterador++;
-                            if (arquivoLido.charAt(iterador) == '"') {
-                                 System.out.printf("CC \":%c\n", arquivoLido.charAt(iterador));
-                                lexema += arquivoLido.charAt(iterador);
-                                iterador++;
-                            }
-                        } else {
-                            System.out.printf("CC SIMBOLO:%c\n", arquivoLido.charAt(iterador));
+                    } else if (Character.isAlphabetic(arquivoLido.charAt(iterador))) {
+                        System.out.printf("CC LETRA:%c\n", arquivoLido.charAt(iterador));
+                        lexema += arquivoLido.charAt(iterador);
+                        iterador++;
+                    } else if (Character.isDigit(arquivoLido.charAt(iterador))) {
+                        System.out.printf("CC DIGITO:%c\n", arquivoLido.charAt(iterador));
+                        lexema += arquivoLido.charAt(iterador);
+                        iterador++;
+                    } else if (arquivoLido.charAt(iterador) == '\\') {
+                        System.out.printf("CC \\:%c\n", arquivoLido.charAt(iterador));
+                        lexema += arquivoLido.charAt(iterador);
+                        iterador++;
+                        if (arquivoLido.charAt(iterador) == '"') {
+                            System.out.printf("CC \":%c\n", arquivoLido.charAt(iterador));
                             lexema += arquivoLido.charAt(iterador);
                             iterador++;
                         }
-//                        System.out.println("FECHA CADEIA CARACTERES");
-                        //break;
+                    } else if (arquivoLido.charAt(iterador) == ' ' || arquivoLido.charAt(iterador) == '!' || arquivoLido.charAt(iterador) == '#' || arquivoLido.charAt(iterador) == '$' || arquivoLido.charAt(iterador) == '%' || arquivoLido.charAt(iterador) == '&' || arquivoLido.charAt(iterador) == '\'' || arquivoLido.charAt(iterador) == '(' || arquivoLido.charAt(iterador) == ')' || arquivoLido.charAt(iterador) == '*' || arquivoLido.charAt(iterador) == '+' || arquivoLido.charAt(iterador) == ',' || arquivoLido.charAt(iterador) == '-' || arquivoLido.charAt(iterador) == '.' || arquivoLido.charAt(iterador) == '/' || arquivoLido.charAt(iterador) == ':' || arquivoLido.charAt(iterador) == ';' || arquivoLido.charAt(iterador) == '<' || arquivoLido.charAt(iterador) == '=' || arquivoLido.charAt(iterador) == '>' || arquivoLido.charAt(iterador) == '?' || arquivoLido.charAt(iterador) == '@' || arquivoLido.charAt(iterador) == '[' || arquivoLido.charAt(iterador) == ']' || arquivoLido.charAt(iterador) == '^' || arquivoLido.charAt(iterador) == '_' || arquivoLido.charAt(iterador) == '`' || arquivoLido.charAt(iterador) == '{' || arquivoLido.charAt(iterador) == '|' || arquivoLido.charAt(iterador) == '}' || arquivoLido.charAt(iterador) == '~') {
+                        System.out.printf("SIMBOLO CC:%c\n", arquivoLido.charAt(iterador));
+                        lexema += arquivoLido.charAt(iterador);
+                        iterador++;
+                    } else {
+                        System.out.printf("CC MAL FORMADO:%c\n", arquivoLido.charAt(iterador));
+                        lexema = "";
+                        break;
                     }
                 }
                 System.out.printf("lexema after while CC:%s\n", lexema);
                 if (cadeiaCaracteres(lexema)) {
-                    System.out.printf("CC:%s\n", lexema);
+                    System.out.printf("CADEIA DE CARACTERES:%s\n", lexema);
                     lexema = "";
                 } else {
                     lexema = "";
                 }
+            } else if (arquivoLido.charAt(iterador) == '#' || arquivoLido.charAt(iterador) == '$' || arquivoLido.charAt(iterador) == '%' || arquivoLido.charAt(iterador) == '\'' || arquivoLido.charAt(iterador) == ',' || arquivoLido.charAt(iterador) == '.' || arquivoLido.charAt(iterador) == ':' || arquivoLido.charAt(iterador) == '?' || arquivoLido.charAt(iterador) == '@' || arquivoLido.charAt(iterador) == '^' || arquivoLido.charAt(iterador) == '_' || arquivoLido.charAt(iterador) == '`' || arquivoLido.charAt(iterador) == '~' || arquivoLido.charAt(iterador) == '\\') {
+                System.out.printf("SIMBOLO INESPERADO:%c\n", arquivoLido.charAt(iterador));
+                iterador++;
             } else {
                 iterador++;
             }
@@ -408,8 +415,14 @@ public class AnalisadorLexController {
     }
 
     public boolean cadeiaCaracteres(String lexema) {
+        String simbolo = "[ -~]*[^\"]";
+        return lexema.matches("\"[[a-zA-Z][0-9]" + simbolo + "[\"]]*\"");
+        // return lexema.matches("[ -~]*[^\"]");
+    }
 
-        return lexema.matches("[[a-zA-Z][0-9][\"]]*");
+    public boolean simbolos(String lexema) {
+        String simbolo = "[ -~]*[^\"]";
+        return lexema.matches(simbolo);
     }
 
 }

@@ -1,1 +1,12 @@
-aasd23123""e23412424""zasdas"
+exemplo teste;
+_
+float f = 3a+;
+
+$stri$ng msg = "teste
+
+if ( f >= -10) && (f < ) 
+	print("mensagem );
+	
+//a- exemplo de teste do lexico
+%
+/* exa869 mi processadores de linguagem de programacao**/

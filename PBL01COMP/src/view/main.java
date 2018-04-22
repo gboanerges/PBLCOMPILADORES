@@ -24,19 +24,18 @@ public class main {
 
         BufferedReader br = new BufferedReader(new FileReader(path));
         while (br.ready()) {
-//            linha += br.readLine() + "\n";
-            linha += br.readLine();
+            linha += br.readLine() + "\n";
+            //linha += br.readLine();
         }
         br.close();
 
         System.out.printf("texto:%s\n", linha);
-        boolean num = analisadorL.cadeiaCaracteres(linha);
-        if (!num) {
-            System.out.println("fail");
-        } else {
-            System.out.println("true");
-
-        }
-//        analisadorL.analisarCaracteres(linha);
+//        boolean num = analisadorL.cadeiaCaracteres(linha);
+//        if (!num) {
+//            System.out.println("fail");
+//        } else {
+//            System.out.println("true");
+//        }
+        analisadorL.analisarCaracteres(linha);
     }
 }
