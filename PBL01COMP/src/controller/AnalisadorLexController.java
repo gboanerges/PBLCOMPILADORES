@@ -124,14 +124,14 @@ public class AnalisadorLexController {
                             lexema = "";
                             iterador++;
 
-                        } else if (arquivoLido.charAt(iterador) == ' ' | arquivoLido.charAt(iterador) == '\t' | arquivoLido.charAt(iterador) == '\n' | arquivoLido.charAt(iterador) == '\r') {
-                            System.out.println("ESPACO CASE -");
+                        } else if (arquivoLido.charAt(iterador) == ' ' || arquivoLido.charAt(iterador) == '\t' || arquivoLido.charAt(iterador) == '\n' || arquivoLido.charAt(iterador) == '\r') {
+                            System.out.printf("111ESPACO CASE -:%c\n", arquivoLido.charAt(iterador));
                             lexema += arquivoLido.charAt(iterador);
                             iterador++;
                             while (iterador < arquivoLido.length()) {
                                 System.out.println("WHILE ESPACO CASE -");
-                                if (arquivoLido.charAt(iterador) == ' ' | arquivoLido.charAt(iterador) == '\t' | arquivoLido.charAt(iterador) == '\n' | arquivoLido.charAt(iterador) == '\r') {
-                                    System.out.printf("ESPACO CASE -:%c\n", arquivoLido.charAt(iterador));
+                                if (arquivoLido.charAt(iterador) == ' ' || arquivoLido.charAt(iterador) == '\t' || arquivoLido.charAt(iterador) == '\n' || arquivoLido.charAt(iterador) == '\r') {
+                                    System.out.printf("222ESPACO CASE -:%c\n", arquivoLido.charAt(iterador));
                                     lexema += arquivoLido.charAt(iterador);
                                     iterador++;
                                 } else if (Character.isDigit(arquivoLido.charAt(iterador))) {
@@ -344,23 +344,48 @@ public class AnalisadorLexController {
 
             } else if (arquivoLido.charAt(iterador) == '"') {
                 System.out.printf("INICIO CADEIA CARACTERES:%c\n", arquivoLido.charAt(iterador));
-                lexema += arquivoLido.charAt(iterador);
+                //lexema += arquivoLido.charAt(iterador);
                 iterador++;
                 while (iterador < arquivoLido.length()) {
                     System.out.println("WHILE CARACTERES");
-                    if (arquivoLido.charAt(iterador) != '"') {
+                    if (arquivoLido.charAt(iterador) == '"') {
+                        System.out.println("FECHA CADEIA CARACTERES");
+                        iterador++;
+                        break;
+                    } else {
+                        System.out.printf("NAO EH ASPA:%c\n", arquivoLido.charAt(iterador));
                         if (Character.isAlphabetic(arquivoLido.charAt(iterador))) {
-                            System.out.printf("LETRA:%c\n", arquivoLido.charAt(iterador));
+                            System.out.printf("CC LETRA:%c\n", arquivoLido.charAt(iterador));
                             lexema += arquivoLido.charAt(iterador);
                             iterador++;
                         } else if (Character.isDigit(arquivoLido.charAt(iterador))) {
-                            System.out.printf("DIGITO:%c\n", arquivoLido.charAt(iterador));
+                            System.out.printf("CC DIGITO:%c\n", arquivoLido.charAt(iterador));
+                            lexema += arquivoLido.charAt(iterador);
+                            iterador++;
+                        } else if (arquivoLido.charAt(iterador) == '\\') {
+                            System.out.printf("CC \\:%c\n", arquivoLido.charAt(iterador));
+                            lexema += arquivoLido.charAt(iterador);
+                            iterador++;
+                            if (arquivoLido.charAt(iterador) == '"') {
+                                 System.out.printf("CC \":%c\n", arquivoLido.charAt(iterador));
+                                lexema += arquivoLido.charAt(iterador);
+                                iterador++;
+                            }
+                        } else {
+                            System.out.printf("CC SIMBOLO:%c\n", arquivoLido.charAt(iterador));
                             lexema += arquivoLido.charAt(iterador);
                             iterador++;
                         }
-                    } else {
-                        break;
+//                        System.out.println("FECHA CADEIA CARACTERES");
+                        //break;
                     }
+                }
+                System.out.printf("lexema after while CC:%s\n", lexema);
+                if (cadeiaCaracteres(lexema)) {
+                    System.out.printf("CC:%s\n", lexema);
+                    lexema = "";
+                } else {
+                    lexema = "";
                 }
             } else {
                 iterador++;
@@ -380,6 +405,11 @@ public class AnalisadorLexController {
     public boolean numero(String lexema) {
         String space = "[[ ][\t][\n][\r]]*";
         return lexema.matches("[-]?" + space + "[0-9][0-9]*(.[0-9][0-9]*)?");
+    }
+
+    public boolean cadeiaCaracteres(String lexema) {
+
+        return lexema.matches("[[a-zA-Z][0-9][\"]]*");
     }
 
 }
