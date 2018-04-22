@@ -67,29 +67,35 @@ public class AnalisadorLexController {
                 System.out.printf("\nPRIMEIRO NUMERO:%c\n", arquivoLido.charAt(iterador));
                 lexema += arquivoLido.charAt(iterador);
                 iterador++;
-//                while (iterador < arquivoLido.length()) {
-//                    System.out.println("WHILE NUM");
-//                    if (Character.isDigit(arquivoLido.charAt(iterador))) {
-//                        System.out.printf("NUM:%c\n", arquivoLido.charAt(iterador));
-//                        lexema += arquivoLido.charAt(iterador);
-//                        iterador++;
-//
-//                    } else {
-//                        System.out.printf("ACHOU ALGO QUE NAO EH DIGITO:%c\n", arquivoLido.charAt(iterador));
-//                        if (arquivoLido.charAt(iterador) == '.') {
-//                            System.out.printf("PONTO:%c\n", arquivoLido.charAt(iterador));
-//                            lexema += arquivoLido.charAt(iterador);
-//                            iterador++;
-//
-//                        } else {
-//                            iterador++;
-//                            break;
-//
-//                        }
-//                    }
-//                }
+                while (iterador < arquivoLido.length()) {
+                    System.out.println("WHILE NUM");
+                    if (Character.isDigit(arquivoLido.charAt(iterador))) {
+                        System.out.printf("NUM:%c\n", arquivoLido.charAt(iterador));
+                        lexema += arquivoLido.charAt(iterador);
+                        iterador++;
+
+                    } else if (arquivoLido.charAt(iterador) == '.') {
+                        System.out.printf("PONTO:%c\n", arquivoLido.charAt(iterador));
+
+                        if (Character.isDigit(arquivoLido.charAt(iterador+1))) {
+                            System.out.printf("NUM PONTO:%c\n", arquivoLido.charAt(iterador));
+                            lexema += arquivoLido.charAt(iterador);
+                            iterador++;
+
+                        } else {
+                            System.out.printf("NAO EH DIGITO DPS DO PONTO:%c\n", arquivoLido.charAt(iterador + 1));
+                            break;
+                        }
+                    } else {
+                        System.out.printf("ACHOU ALGO QUE NAO EH DIGITO:%c\n", arquivoLido.charAt(iterador));
+                        break;
+                    }
+                }
+                System.out.printf("lexema after while NUM:%s\n", lexema);
                 if (numero(lexema)) {
                     System.out.printf("numero:%s\n", lexema);
+                    lexema = "";
+                } else {
                     lexema = "";
                 }
             } else if (arquivoLido.charAt(iterador) == '+' || arquivoLido.charAt(iterador) == '-' || arquivoLido.charAt(iterador) == '*' || arquivoLido.charAt(iterador) == '/') {
@@ -252,6 +258,26 @@ public class AnalisadorLexController {
                 System.out.printf("DELIMITADOR:%c\n", arquivoLido.charAt(iterador));
                 iterador++;
 
+            } else if (arquivoLido.charAt(iterador) == '"') {
+                System.out.printf("INICIO CADEIA CARACTERES:%c\n", arquivoLido.charAt(iterador));
+                lexema += arquivoLido.charAt(iterador);
+                iterador++;
+                while (iterador < arquivoLido.length()) {
+                    System.out.println("WHILE CARACTERES");
+                    if (arquivoLido.charAt(iterador) != '"') {
+                        if (Character.isAlphabetic(arquivoLido.charAt(iterador))) {
+                            System.out.printf("LETRA:%c\n", arquivoLido.charAt(iterador));
+                            lexema += arquivoLido.charAt(iterador);
+                            iterador++;
+                        } else if (Character.isDigit(arquivoLido.charAt(iterador))) {
+                            System.out.printf("DIGITO:%c\n", arquivoLido.charAt(iterador));
+                            lexema += arquivoLido.charAt(iterador);
+                            iterador++;
+                        }
+                    } else {
+                        break;
+                    }
+                }
             } else {
                 iterador++;
             }
@@ -268,8 +294,8 @@ public class AnalisadorLexController {
     }
 
     public boolean numero(String lexema) {
-
-        return lexema.matches("[-]?[ ]*[0-9][0-9]*[[.]0-9[0-9]*]");
+        String space = "[[ ][\t][\n][\r]]*";
+        return lexema.matches("[-]?" + space + "[0-9][0-9]*(.[0-9][0-9]*)?");
     }
 
 }

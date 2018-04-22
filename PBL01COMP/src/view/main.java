@@ -7,6 +7,7 @@ package view;
 
 import controller.AnalisadorLexController;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -16,23 +17,26 @@ import java.io.IOException;
  */
 public class main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
         String linha = "";
         String path = "C:\\Users\\jvboa\\Documents\\GUSTAVO\\COMPILADORES\\PBLCOMPILADORES\\PBL01COMP\\src\\arquivo.txt";
         AnalisadorLexController analisadorL = new AnalisadorLexController();
 
-        try {
-
-            BufferedReader br = new BufferedReader(new FileReader(path));
-            while (br.ready()) {
-                linha += br.readLine() + "\n";
-                //linha += br.readLine();
-            }
-            br.close();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+        BufferedReader br = new BufferedReader(new FileReader(path));
+        while (br.ready()) {
+            linha += br.readLine() + "\n";
+//            linha += br.readLine();
         }
-        System.out.printf("texto:%s", linha);
+        br.close();
+
+        System.out.printf("texto:%s\n", linha);
+//        boolean num = analisadorL.numero(linha);
+//        if (!num) {
+//            System.out.println("fail");
+//        } else {
+//            System.out.println("true");
+//
+//        }
         analisadorL.analisarCaracteres(linha);
     }
 }
