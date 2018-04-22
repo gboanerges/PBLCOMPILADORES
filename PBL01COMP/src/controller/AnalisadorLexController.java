@@ -77,7 +77,7 @@ public class AnalisadorLexController {
                     } else if (arquivoLido.charAt(iterador) == '.') {
                         System.out.printf("PONTO:%c\n", arquivoLido.charAt(iterador));
 
-                        if (Character.isDigit(arquivoLido.charAt(iterador+1))) {
+                        if (Character.isDigit(arquivoLido.charAt(iterador + 1))) {
                             System.out.printf("NUM PONTO:%c\n", arquivoLido.charAt(iterador));
                             lexema += arquivoLido.charAt(iterador);
                             iterador++;
@@ -124,9 +124,93 @@ public class AnalisadorLexController {
                             lexema = "";
                             iterador++;
 
+                        } else if (arquivoLido.charAt(iterador) == ' ' | arquivoLido.charAt(iterador) == '\t' | arquivoLido.charAt(iterador) == '\n' | arquivoLido.charAt(iterador) == '\r') {
+                            System.out.println("ESPACO CASE -");
+                            lexema += arquivoLido.charAt(iterador);
+                            iterador++;
+                            while (iterador < arquivoLido.length()) {
+                                System.out.println("WHILE ESPACO CASE -");
+                                if (arquivoLido.charAt(iterador) == ' ' | arquivoLido.charAt(iterador) == '\t' | arquivoLido.charAt(iterador) == '\n' | arquivoLido.charAt(iterador) == '\r') {
+                                    System.out.printf("ESPACO CASE -:%c\n", arquivoLido.charAt(iterador));
+                                    lexema += arquivoLido.charAt(iterador);
+                                    iterador++;
+                                } else if (Character.isDigit(arquivoLido.charAt(iterador))) {
+                                    System.out.printf("\nPRIMEIRO NUMERO:%c\n", arquivoLido.charAt(iterador));
+                                    lexema += arquivoLido.charAt(iterador);
+                                    iterador++;
+                                    while (iterador < arquivoLido.length()) {
+                                        System.out.println("WHILE NUM");
+                                        if (Character.isDigit(arquivoLido.charAt(iterador))) {
+                                            System.out.printf("NUM:%c\n", arquivoLido.charAt(iterador));
+                                            lexema += arquivoLido.charAt(iterador);
+                                            iterador++;
+
+                                        } else if (arquivoLido.charAt(iterador) == '.') {
+                                            System.out.printf("PONTO:%c\n", arquivoLido.charAt(iterador));
+
+                                            if (Character.isDigit(arquivoLido.charAt(iterador + 1))) {
+                                                System.out.printf("NUM PONTO:%c\n", arquivoLido.charAt(iterador));
+                                                lexema += arquivoLido.charAt(iterador);
+                                                iterador++;
+
+                                            } else {
+                                                System.out.printf("NAO EH DIGITO DPS DO PONTO:%c\n", arquivoLido.charAt(iterador + 1));
+                                                break;
+                                            }
+                                        } else {
+                                            System.out.printf("ACHOU ALGO QUE NAO EH DIGITO:%c\n", arquivoLido.charAt(iterador));
+                                            break;
+                                        }
+                                    }
+                                    System.out.printf("lexema after while NUM:%s\n", lexema);
+                                    if (numero(lexema)) {
+                                        System.out.printf("numero:%s\n", lexema);
+                                        lexema = "";
+                                    } else {
+                                        lexema = "";
+                                    }
+                                } else {
+                                    lexema = "";
+                                    break;
+                                }
+                            }
+                        } else if (Character.isDigit(arquivoLido.charAt(iterador))) {
+                            System.out.printf("\nPRIMEIRO NUMERO:%c\n", arquivoLido.charAt(iterador));
+                            lexema += arquivoLido.charAt(iterador);
+                            iterador++;
+                            while (iterador < arquivoLido.length()) {
+                                System.out.println("WHILE NUM");
+                                if (Character.isDigit(arquivoLido.charAt(iterador))) {
+                                    System.out.printf("NUM:%c\n", arquivoLido.charAt(iterador));
+                                    lexema += arquivoLido.charAt(iterador);
+                                    iterador++;
+
+                                } else if (arquivoLido.charAt(iterador) == '.') {
+                                    System.out.printf("PONTO:%c\n", arquivoLido.charAt(iterador));
+
+                                    if (Character.isDigit(arquivoLido.charAt(iterador + 1))) {
+                                        System.out.printf("NUM PONTO:%c\n", arquivoLido.charAt(iterador));
+                                        lexema += arquivoLido.charAt(iterador);
+                                        iterador++;
+
+                                    } else {
+                                        System.out.printf("NAO EH DIGITO DPS DO PONTO:%c\n", arquivoLido.charAt(iterador + 1));
+                                        break;
+                                    }
+                                } else {
+                                    System.out.printf("ACHOU ALGO QUE NAO EH DIGITO:%c\n", arquivoLido.charAt(iterador));
+                                    break;
+                                }
+                            }
+                            System.out.printf("lexema after while NUM:%s\n", lexema);
+                            if (numero(lexema)) {
+                                System.out.printf("numero:%s\n", lexema);
+                                lexema = "";
+                            } else {
+                                lexema = "";
+                            }
                         } else {
                             lexema = "";
-
                         }
                         break;
                     case '/':
