@@ -1,12 +1,12 @@
-exemplo teste;
-_
+/*exemplo teste;
+
 float f = 3a+;
 
-$stri$ng msg = "teste
+string msg = "teste
 
 if ( f >= -10) && (f < ) 
-	print("mensagem );
+	print("mensagem );*/a1.
 	
-//a- exemplo de teste do lexico
-%
-/* exa869 mi processadores de linguagem de programacao**/
+// exemplo de teste do lexico
+
+/* exa869 mi processadores de linguagem de programacao*0ri12849/ asdas*/asf2_2 2.

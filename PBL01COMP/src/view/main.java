@@ -9,7 +9,11 @@ import controller.AnalisadorLexController;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Collection;
+import model.ErroLex;
 
 /**
  *
@@ -37,5 +41,13 @@ public class main {
 //            System.out.println("true");
 //        }
         analisadorL.analisarCaracteres(linha);
+        Collection<ErroLex> erros = analisadorL.getErrosLista();
+        if (erros.isEmpty()) {
+            System.out.println("SEM ERROS LEXICOS");
+        }
+        FileWriter arq = new FileWriter("C:\\Users\\jvboa\\Documents\\GUSTAVO\\COMPILADORES\\PBLCOMPILADORES\\PBL01COMP\\src\\saida.txt");
+        PrintWriter escreverArq = new PrintWriter(arq);
+        escreverArq.printf("+--Resultado--+%n");
+        arq.close();
     }
 }

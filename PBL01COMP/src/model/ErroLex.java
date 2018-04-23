@@ -9,7 +9,7 @@ package model;
  *
  * @author jvboa
  */
-public class Token {
+public class ErroLex {
 
     private int line;
     private int position;
@@ -17,7 +17,7 @@ public class Token {
     private String value;
     private String type;
 
-    public Token(String valor, String tipo, int linha, int posicao) {
+    public ErroLex(String valor, String tipo, int linha, int posicao) {
         this.line = linha;
         this.position = posicao;
         this.value = valor;

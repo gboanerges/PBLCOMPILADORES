@@ -5,15 +5,24 @@
  */
 package controller;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import model.ErroLex;
+import model.Token;
+
 /**
  *
  * @author jvboa
  */
 public class AnalisadorLexController {
 
+    private Collection<Token> tokenList = new ArrayList();
+    private Collection<ErroLex> errosList = new ArrayList();
+
     public void analisarCaracteres(String arquivoLido) {
         System.out.println("analisarCaracteres");
         String lexema = "";
+        boolean fechaComentBloco = false;
         int iterador = 0;
         do {
             if (arquivoLido.charAt(iterador) == ' ') {
@@ -232,9 +241,12 @@ public class AnalisadorLexController {
                         } else if (arquivoLido.charAt(iterador) == '*') {
                             lexema += arquivoLido.charAt(iterador);
                             System.out.printf("COMENTARIO DE BLOCO:%s\n", lexema);
+                            fechaComentBloco = false;
 
+                            iterador++;
                             while (iterador < arquivoLido.length()) {
                                 if (arquivoLido.charAt(iterador) == '*') {
+                                    System.out.println("ACHOU *");
                                     iterador++;
 
                                     if (arquivoLido.charAt(iterador) == '/') {
@@ -242,16 +254,24 @@ public class AnalisadorLexController {
                                         lexema += arquivoLido.charAt(iterador - 1);
                                         lexema += arquivoLido.charAt(iterador);
                                         System.out.printf("FECHA COMENTARIO DE BLOCO:%s\n", lexema);
+                                        fechaComentBloco = true;
                                         lexema = "";
+                                        iterador++;
                                         break;
                                     } else {
-                                        System.out.println("COMENTARIO DE BLOCO NAO FECHADO");
+                                        //System.out.println("COMENTARIO DE BLOCO NAO FECHADO");
+                                        iterador++;
+
                                     }
+                                } else {
+                                    iterador++;
                                 }
-                                iterador++;
+                            }
+                            if (!fechaComentBloco) {
+                                System.out.println("COMENTARIO DE BLOCO NAO FECHADO");
 
                             }
-                            iterador++;
+
                         } else {
                             lexema = "";
                         }
@@ -416,13 +436,18 @@ public class AnalisadorLexController {
 
     public boolean cadeiaCaracteres(String lexema) {
         String simbolo = "[ -~]*[^\"]";
-        return lexema.matches("\"[[a-zA-Z][0-9]" + simbolo + "[\"]]*\"");
-        // return lexema.matches("[ -~]*[^\"]");
+        //return lexema.matches("\"[[a-zA-Z][0-9]" + simbolo + "[\"]]*\"");
+        return lexema.matches("\"[" + simbolo + "[\"]]*\"");
+
     }
 
     public boolean simbolos(String lexema) {
         String simbolo = "[ -~]*[^\"]";
         return lexema.matches(simbolo);
+    }
+
+    public Collection<ErroLex> getErrosLista() {
+        return errosList;
     }
 
 }
