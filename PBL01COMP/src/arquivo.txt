@@ -1,12 +1,8 @@
-/*exemplo teste;
+const bool exemplo teste;,()[]{}.
 
 float f = 3a+;
 
-string msg = "teste
+42 a4a"a23$ \""
 
-if ( f >= -10) && (f < ) 
-	print("mensagem );*/a1.
-	
-// exemplo de teste do lexico
-
-/* exa869 mi processadores de linguagem de programacao*0ri12849/ asdas*/asf2_2 2.
+!===<<=>>==&+-*/++--!&&||
+- 2|%a

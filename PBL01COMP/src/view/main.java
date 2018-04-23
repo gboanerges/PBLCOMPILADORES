@@ -12,8 +12,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.Collection;
 import model.ErroLex;
+import model.Token;
 
 /**
  *
@@ -41,13 +43,28 @@ public class main {
 //            System.out.println("true");
 //        }
         analisadorL.analisarCaracteres(linha);
-        Collection<ErroLex> erros = analisadorL.getErrosLista();
-        if (erros.isEmpty()) {
-            System.out.println("SEM ERROS LEXICOS");
-        }
+        Collection<Token> tokensLista = analisadorL.getTokensLista();
+        Collection<ErroLex> errosLista = analisadorL.getErrosLista();
+
         FileWriter arq = new FileWriter("C:\\Users\\jvboa\\Documents\\GUSTAVO\\COMPILADORES\\PBLCOMPILADORES\\PBL01COMP\\src\\saida.txt");
         PrintWriter escreverArq = new PrintWriter(arq);
         escreverArq.printf("+--Resultado--+%n");
+        if (tokensLista.isEmpty()) {
+            escreverArq.printf("NAO EXISTE TOKENS OU ARQUIVO VAZIO");
+        } else {
+            tokensLista.forEach((tokens) -> {
+                escreverArq.printf("Tipo: " + tokens.getType() + " Valor: " + tokens.getValue() + " Linha: " + tokens.getLine() + " Posicao: " + tokens.getPosition() + "%n");
+            });
+
+        }
+        if (errosLista.isEmpty()) {
+            escreverArq.printf("SEM ERROS LEXICOS%n+----------------------+");
+        } else {
+            escreverArq.printf("%nERROS LEXICOS%n");
+            for (ErroLex erros : errosLista) {
+                escreverArq.printf("Tipo: " + erros.getType() + " Valor: " + erros.getValue() + " Linha: " + erros.getLine() + " Posicao: " + erros.getPosition() + "%n");
+            }
+        }
         arq.close();
     }
 }
