@@ -16,12 +16,14 @@ public class ErroLex {
 
     private String value;
     private String type;
+    private String description;
 
-    public ErroLex(String valor, String tipo, int linha, int posicao) {
+    public ErroLex(String valor, String tipo, int linha, int posicao, String description) {
         this.line = linha;
         this.position = posicao;
         this.value = valor;
         this.type = tipo;
+        this.description = description;
     }
 
     public int getLine() {
@@ -38,5 +40,9 @@ public class ErroLex {
 
     public String getType() {
         return type;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

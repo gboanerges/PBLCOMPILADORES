@@ -6,14 +6,15 @@
 package view;
 
 import controller.AnalisadorLexController;
+import controller.AnalisadorSintController;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
-import java.util.Collection;
 import model.ErroLex;
 import model.Token;
 
@@ -43,17 +44,19 @@ public class main {
 //            System.out.println("true");
 //        }
         analisadorL.analisarCaracteres(linha);
-        Collection<Token> tokensLista = analisadorL.getTokensLista();
-        Collection<ErroLex> errosLista = analisadorL.getErrosLista();
-
+        ArrayList<Token> tokensLista = analisadorL.getTokensLista();       
+        ArrayList<ErroLex> errosLista = analisadorL.getErrosLista();
         FileWriter arq = new FileWriter("C:\\Users\\jvboa\\Documents\\GUSTAVO\\COMPILADORES\\PBLCOMPILADORES\\PBL01COMP\\src\\saida.txt");
         PrintWriter escreverArq = new PrintWriter(arq);
-        escreverArq.printf("+--Resultado--+%n");
+        escreverArq.printf("+--Resultado Analisador Léxico--+%n");
         if (tokensLista.isEmpty()) {
             escreverArq.printf("NAO EXISTE TOKENS OU ARQUIVO VAZIO");
         } else {
             tokensLista.forEach((tokens) -> {
-                escreverArq.printf("Tipo: " + tokens.getType() + " Valor: " + tokens.getValue() + " Linha: " + tokens.getLine() + " Posicao: " + tokens.getPosition() + "%n");
+                if(tokens.getDescription().equals("") ){
+                    escreverArq.printf("Tipo: " + tokens.getType() + " Valor: " + tokens.getValue() + " Linha: " + tokens.getLine() + " Posicao: " + tokens.getPosition() + "%n"); 
+                }
+                
             });
 
         }
@@ -61,10 +64,14 @@ public class main {
             escreverArq.printf("SEM ERROS LEXICOS%n+----------------------+");
         } else {
             escreverArq.printf("%nERROS LEXICOS%n");
-            for (ErroLex erros : errosLista) {
-                escreverArq.printf("Tipo: " + erros.getType() + " Valor: " + erros.getValue() + " Linha: " + erros.getLine() + " Posicao: " + erros.getPosition() + "%n");
-            }
+            errosLista.forEach((erros) -> {
+                escreverArq.printf("Erro: " + erros.getDescription()+ " Valor: " + erros.getValue() + " Linha: " + erros.getLine() + " Posicao: " + erros.getPosition() + "%n");
+            });
         }
         arq.close();
+        
+        AnalisadorSintController as = new AnalisadorSintController(tokensLista);
+        as.print();
+     
     }
 }

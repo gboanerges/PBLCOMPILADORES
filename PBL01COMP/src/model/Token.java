@@ -16,12 +16,15 @@ public class Token {
 
     private String value;
     private String type;
-
-    public Token(String valor, String tipo, int linha, int posicao) {
+    private String description;
+    
+    
+    public Token(String valor, String tipo, int linha, int posicao, String description) {
         this.line = linha;
         this.position = posicao;
         this.value = valor;
         this.type = tipo;
+        this.description = description;
     }
 
     public int getLine() {
@@ -38,5 +41,9 @@ public class Token {
 
     public String getType() {
         return type;
+    }
+    
+    public String getDescription() {
+        return description;
     }
 }

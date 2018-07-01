@@ -17,8 +17,8 @@ import model.Token;
  */
 public class AnalisadorLexController {
 
-    private Collection<Token> tokenList = new ArrayList<Token>();
-    private Collection<ErroLex> errosList = new ArrayList<ErroLex>();
+    private ArrayList<Token> tokenList = new ArrayList<>();
+    private ArrayList<ErroLex> errosList = new ArrayList<>();
 
     public void analisarCaracteres(String arquivoLido) {
         System.out.println("analisarCaracteres");
@@ -68,12 +68,12 @@ public class AnalisadorLexController {
                 if (palavrasReservadas(lexema)) {
 
                     System.out.printf("palavraRes:%s\n", lexema);
-                    Token palavRes = new Token(lexema, "PRE", linha, iterador);
+                    Token palavRes = new Token(lexema, "PRE", linha, iterador, "");
                     tokenList.add(palavRes);
                     lexema = "";
                 } else if (identificadores(lexema)) {
                     System.out.printf("id:%s\n", lexema);
-                    Token id = new Token(lexema, "IDE", linha, iterador);
+                    Token id = new Token(lexema, "IDE", linha, iterador, "");
                     tokenList.add(id);
                     lexema = "";
                 } else {
@@ -110,7 +110,7 @@ public class AnalisadorLexController {
                 System.out.printf("lexema after while NUM:%s\n", lexema);
                 if (numero(lexema)) {
                     System.out.printf("numero:%s\n", lexema);
-                    Token num = new Token(lexema, "NRO", linha, iterador);
+                    Token num = new Token(lexema, "NRO", linha, iterador, "");
                     tokenList.add(num);
                     lexema = "";
                 } else {
@@ -127,12 +127,12 @@ public class AnalisadorLexController {
                         if (arquivoLido.charAt(iterador) == '+') {
                             lexema += arquivoLido.charAt(iterador);
                             System.out.printf("DUPLO OP ARIT:%s\n", lexema);
-                            Token opArit = new Token(lexema, "ART", linha, iterador);
+                            Token opArit = new Token(lexema, "ART", linha, iterador, "");
                             tokenList.add(opArit);
                             lexema = "";
                             iterador++;
                         } else {
-                            Token opArit = new Token(lexema, "ART", linha, iterador);
+                            Token opArit = new Token(lexema, "ART", linha, iterador, "");
                             tokenList.add(opArit);
                             lexema = "";
 
@@ -143,7 +143,7 @@ public class AnalisadorLexController {
                         if (arquivoLido.charAt(iterador) == '-') {
                             lexema += arquivoLido.charAt(iterador);
                             System.out.printf("DUPLO OP ARIT:%s\n", lexema);
-                            Token opArit = new Token(lexema, "ART", linha, iterador);
+                            Token opArit = new Token(lexema, "ART", linha, iterador, "");
                             tokenList.add(opArit);
                             lexema = "";
                             iterador++;
@@ -195,7 +195,7 @@ public class AnalisadorLexController {
                                     System.out.printf("lexema after while NUM CASE -:%s\n", lexema);
                                     if (numero(lexema)) {
                                         System.out.printf("numero CASE -:%s\n", lexema);
-                                        Token num = new Token(lexema, "NRO", linha, iterador);
+                                        Token num = new Token(lexema, "NRO", linha, iterador, "");
                                         tokenList.add(num);
                                         lexema = "";
                                     } else {
@@ -238,14 +238,14 @@ public class AnalisadorLexController {
                             System.out.printf("lexema after while NUM:%s\n", lexema);
                             if (numero(lexema)) {
                                 System.out.printf("numero:%s\n", lexema);
-                                Token num = new Token(lexema, "NRO", linha, iterador);
+                                Token num = new Token(lexema, "NRO", linha, iterador, "");
                                 tokenList.add(num);
                                 lexema = "";
                             } else {
                                 lexema = "";
                             }
                         } else {
-                            Token opArit = new Token(lexema, "ART", linha, iterador);
+                            Token opArit = new Token(lexema, "ART", linha, iterador, "");
                             tokenList.add(opArit);
                             lexema = "";
                         }
@@ -302,13 +302,13 @@ public class AnalisadorLexController {
                             }
 
                         } else {
-                            Token opArit = new Token(lexema, "ART", linha, iterador);
+                            Token opArit = new Token(lexema, "ART", linha, iterador, "");
                             tokenList.add(opArit);
                             lexema = "";
                         }
                         break;
                     case '*':
-                        Token opArit = new Token(lexema, "ART", linha, iterador);
+                        Token opArit = new Token(lexema, "ART", linha, iterador, "");
                         tokenList.add(opArit);
                         lexema = "";
                         iterador++;
@@ -327,12 +327,12 @@ public class AnalisadorLexController {
                     if (arquivoLido.charAt(iterador) == '=') {
                         lexema += arquivoLido.charAt(iterador);
                         System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
-                        Token opRelacional = new Token(lexema, "REL", linha, iterador);
+                        Token opRelacional = new Token(lexema, "REL", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                         iterador++;
                     } else {
-                        Token opRelacional = new Token(lexema, "LOG", linha, iterador);
+                        Token opRelacional = new Token(lexema, "LOG", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                     }
@@ -342,12 +342,12 @@ public class AnalisadorLexController {
                     if (arquivoLido.charAt(iterador) == '=') {
                         lexema += arquivoLido.charAt(iterador);
                         System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
-                        Token opRelacional = new Token(lexema, "REL", linha, iterador);
+                        Token opRelacional = new Token(lexema, "REL", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                         iterador++;
                     } else {
-                        Token opRelacional = new Token(lexema, "REL", linha, iterador);
+                        Token opRelacional = new Token(lexema, "REL", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                     }
@@ -356,12 +356,12 @@ public class AnalisadorLexController {
                     if (arquivoLido.charAt(iterador) == '=') {
                         lexema += arquivoLido.charAt(iterador);
                         System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
-                        Token opRelacional = new Token(lexema, "REL", linha, iterador);
+                        Token opRelacional = new Token(lexema, "REL", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                         iterador++;
                     } else {
-                        Token opRelacional = new Token(lexema, "REL", linha, iterador);
+                        Token opRelacional = new Token(lexema, "REL", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                     }
@@ -370,12 +370,12 @@ public class AnalisadorLexController {
                     if (arquivoLido.charAt(iterador) == '=') {
                         lexema += arquivoLido.charAt(iterador);
                         System.out.printf("OP RELACIONAL COMPOSTO:%s\n", lexema);
-                        Token opRelacional = new Token(lexema, "REL", linha, iterador);
+                        Token opRelacional = new Token(lexema, "REL", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                         iterador++;
                     } else {
-                        Token opRelacional = new Token(lexema, "REL", linha, iterador);
+                        Token opRelacional = new Token(lexema, "REL", linha, iterador, "");
                         tokenList.add(opRelacional);
                         lexema = "";
                     }
@@ -390,14 +390,16 @@ public class AnalisadorLexController {
                 if (arquivoLido.charAt(iterador) == '&') {
                     lexema += arquivoLido.charAt(iterador);
                     System.out.printf("OP LOGICO:%s\n", lexema);
-                    Token opRelacional = new Token(lexema, "LOG", linha, iterador);
+                    Token opRelacional = new Token(lexema, "LOG", linha, iterador, "");
                     tokenList.add(opRelacional);
                     lexema = "";
                     iterador++;
                 } else {
                     System.out.println("OP LOG MAL FORMADO &&");
-                    ErroLex opRelacional = new ErroLex(lexema, "LOG MF", linha, iterador);
-                    errosList.add(opRelacional);
+                    Token opRelacional = new Token(lexema, "ERR", linha, iterador, "Operador Logico Mal Formado");
+                    tokenList.add(opRelacional);
+                    ErroLex opRelac = new ErroLex(lexema, "ERR", linha, iterador, "Operador Logico Mal Formado");
+                    errosList.add(opRelac);
                     lexema = "";
 
                 }
@@ -408,20 +410,22 @@ public class AnalisadorLexController {
                 if (arquivoLido.charAt(iterador) == '|') {
                     lexema += arquivoLido.charAt(iterador);
                     System.out.printf("OP LOGICO:%s\n", lexema);
-                    Token opRelacional = new Token(lexema, "LOG", linha, iterador);
+                    Token opRelacional = new Token(lexema, "LOG", linha, iterador, "");
                     tokenList.add(opRelacional);
                     lexema = "";
                     iterador++;
                 } else {
                     System.out.println("OP LOG MAL FORMADO |");
-                    ErroLex opRelacional = new ErroLex(lexema, "LOG MF", linha, iterador);
-                    errosList.add(opRelacional);
+                    Token opRelacional = new Token(lexema, "ERR", linha, iterador, "Operador Logico Mal Formado");
+                    tokenList.add(opRelacional);
+                    ErroLex erro = new ErroLex(lexema, "ERR", linha, iterador, "Operador Logico Mal Formado");
+                    errosList.add(erro);
                     lexema = "";
                 }
             } else if (arquivoLido.charAt(iterador) == ';' || arquivoLido.charAt(iterador) == ',' || arquivoLido.charAt(iterador) == '(' || arquivoLido.charAt(iterador) == ')' || arquivoLido.charAt(iterador) == '[' || arquivoLido.charAt(iterador) == ']' || arquivoLido.charAt(iterador) == '{' || arquivoLido.charAt(iterador) == '}' || arquivoLido.charAt(iterador) == '.') {
                 System.out.printf("DELIMITADOR:%c\n", arquivoLido.charAt(iterador));
                 lexema += arquivoLido.charAt(iterador);
-                Token opRelacional = new Token(lexema, "DEL", linha, iterador);
+                Token opRelacional = new Token(lexema, "DEL", linha, iterador, "");
                 tokenList.add(opRelacional);
                 lexema = "";
                 iterador++;
@@ -460,8 +464,10 @@ public class AnalisadorLexController {
                         iterador++;
                     } else {
                         System.out.printf("CC MAL FORMADO:%c\n", arquivoLido.charAt(iterador));
-                        ErroLex opRelacional = new ErroLex(lexema, "CC MF", linha, iterador);
-                        errosList.add(opRelacional);
+                        Token token = new Token(lexema, "ERR", linha, iterador, "Cadeia de caracter Mal formado");
+                        tokenList.add(token);
+                        ErroLex erro = new ErroLex(lexema, "ERR", linha, iterador, "Cadeia de caracter Mal Formado");
+                        errosList.add(erro);
                         lexema = "";
                         break;
                     }
@@ -469,21 +475,27 @@ public class AnalisadorLexController {
                 System.out.printf("lexema after while CC:%s\n", lexema);
                 if (cadeiaCaracteres(lexema)) {
                     System.out.printf("CADEIA DE CARACTERES:%s\n", lexema);
-                    Token opRelacional = new Token(lexema, "CC", linha, iterador);
+                    Token opRelacional = new Token(lexema, "CC", linha, iterador, "");
                     tokenList.add(opRelacional);
                     lexema = "";
                 } else {
                     lexema = "";
                 }
             } else if (arquivoLido.charAt(iterador) == '#' || arquivoLido.charAt(iterador) == '$' || arquivoLido.charAt(iterador) == '%' || arquivoLido.charAt(iterador) == '\'' || arquivoLido.charAt(iterador) == ',' || arquivoLido.charAt(iterador) == '.' || arquivoLido.charAt(iterador) == ':' || arquivoLido.charAt(iterador) == '?' || arquivoLido.charAt(iterador) == '@' || arquivoLido.charAt(iterador) == '^' || arquivoLido.charAt(iterador) == '_' || arquivoLido.charAt(iterador) == '`' || arquivoLido.charAt(iterador) == '~' || arquivoLido.charAt(iterador) == '\\') {
-                System.out.printf("SIMBOLO INESPERADO:%c\n", arquivoLido.charAt(iterador));
-                //lexema += arquivoLido.charAt(iterador);
-                iterador++;
-                ErroLex simbInesperado = new ErroLex(lexema, "SMB IN", linha, iterador);
-                errosList.add(simbInesperado);
+                System.out.printf("SIMBOLO INESPERADO:%c_Posicao:%d\n", arquivoLido.charAt(iterador), iterador);
+
+                //lexema += arquivoLido.charAt(iterador);S
+//                StringBuilder str = new StringBuilder();
+//                str.append(arquivoLido.charAt(iterador));
+                Token simbInesperado = new Token(lexema, "ERR", linha, iterador, "Simbolo Inesperado");
+                tokenList.add(simbInesperado);
+                ErroLex simbolo = new ErroLex(lexema, "ERR", linha, iterador, "Simbolo Inesperado");
+                errosList.add(simbolo);
                 lexema = "";
-                
+                iterador++;
+
             } else {
+
                 iterador++;
             }
         } while (iterador < arquivoLido.length());
@@ -515,12 +527,12 @@ public class AnalisadorLexController {
         return lexema.matches(simbolo);
     }
 
-    public Collection<ErroLex> getErrosLista() {
-        return errosList;
+    public ArrayList<Token> getTokensLista() {
+        return tokenList;
     }
 
-    public Collection<Token> getTokensLista() {
-        return tokenList;
+    public ArrayList<ErroLex> getErrosLista() {
+        return errosList;
     }
 
 }
