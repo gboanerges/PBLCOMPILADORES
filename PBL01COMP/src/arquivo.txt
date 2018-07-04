@@ -1,8 +1,0 @@
-const bool exemplo teste;,()[]{}.
-
-float f = 3a+;
-
-42 a4a"a23$ \""
-
-!===<<=>>==&+-*/++--!&&||
-- 2|%a

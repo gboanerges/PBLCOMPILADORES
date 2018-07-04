@@ -16,6 +16,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import model.ErroLex;
+import model.ErroSintatico;
 import model.Token;
 
 /**
@@ -26,7 +27,7 @@ public class main {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
         String linha = "";
-        String path = "C:\\Users\\jvboa\\Documents\\GUSTAVO\\COMPILADORES\\PBLCOMPILADORES\\PBL01COMP\\src\\arquivo.txt";
+        String path = "src\\entrada.txt";
         AnalisadorLexController analisadorL = new AnalisadorLexController();
 
         BufferedReader br = new BufferedReader(new FileReader(path));
@@ -44,19 +45,19 @@ public class main {
 //            System.out.println("true");
 //        }
         analisadorL.analisarCaracteres(linha);
-        ArrayList<Token> tokensLista = analisadorL.getTokensLista();       
+        ArrayList<Token> tokensLista = analisadorL.getTokensLista();
         ArrayList<ErroLex> errosLista = analisadorL.getErrosLista();
-        FileWriter arq = new FileWriter("C:\\Users\\jvboa\\Documents\\GUSTAVO\\COMPILADORES\\PBLCOMPILADORES\\PBL01COMP\\src\\saida.txt");
+        FileWriter arq = new FileWriter("src\\saidaLex.txt");
         PrintWriter escreverArq = new PrintWriter(arq);
         escreverArq.printf("+--Resultado Analisador Léxico--+%n");
         if (tokensLista.isEmpty()) {
             escreverArq.printf("NAO EXISTE TOKENS OU ARQUIVO VAZIO");
         } else {
             tokensLista.forEach((tokens) -> {
-                if(tokens.getDescription().equals("") ){
-                    escreverArq.printf("Tipo: " + tokens.getType() + " Valor: " + tokens.getValue() + " Linha: " + tokens.getLine() + " Posicao: " + tokens.getPosition() + "%n"); 
+                if (tokens.getDescription().equals("")) {
+                    escreverArq.printf("Tipo: " + tokens.getType() + " Valor: " + tokens.getValue() + " Linha: " + tokens.getLine() + " Posicao: " + tokens.getPosition() + "%n");
                 }
-                
+
             });
 
         }
@@ -65,13 +66,29 @@ public class main {
         } else {
             escreverArq.printf("%nERROS LEXICOS%n");
             errosLista.forEach((erros) -> {
-                escreverArq.printf("Erro: " + erros.getDescription()+ " Valor: " + erros.getValue() + " Linha: " + erros.getLine() + " Posicao: " + erros.getPosition() + "%n");
+                escreverArq.printf("Erro: " + erros.getDescription() + " Valor: " + erros.getValue() + " Linha: " + erros.getLine() + " Posicao: " + erros.getPosition() + "%n");
             });
         }
         arq.close();
-        
+
         AnalisadorSintController as = new AnalisadorSintController(tokensLista);
+        ArrayList<ErroSintatico> errosSint = as.getErrosSint();
+        
+        //Chamar o metodo respectivo ao que sera testado
+        as.scan();
         as.print();
-     
+
+        FileWriter arq2 = new FileWriter("src\\saida.txt");
+        PrintWriter escreverSint = new PrintWriter(arq2);
+        escreverSint.printf("+--Resultado Analisador Sintático--+%n");
+        if (errosSint.isEmpty()) {
+            escreverSint.printf("SEM ERROS SINTATICOS%n+----------------------+");
+        } else {
+            escreverSint.printf("ERROS SINTATICOS%n");
+            errosSint.forEach((erros) -> {
+                escreverSint.printf("Erro: " + erros.getType() +" Linha: " + erros.getLine() +"%n");
+            });
+        }
+        arq2.close();
     }
 }

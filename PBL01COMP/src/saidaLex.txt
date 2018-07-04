@@ -1,0 +1,38 @@
++--Resultado Analisador Léxico--+
+Tipo: PRE Valor: scan Linha: 0 Posicao: 4
+Tipo: DEL Valor: ( Linha: 0 Posicao: 4
+Tipo: DEL Valor: , Linha: 0 Posicao: 5
+Tipo: ART Valor: / Linha: 0 Posicao: 7
+Tipo: IDE Valor: dgba Linha: 0 Posicao: 11
+Tipo: DEL Valor: [ Linha: 0 Posicao: 11
+Tipo: DEL Valor: ] Linha: 0 Posicao: 12
+Tipo: DEL Valor: [ Linha: 0 Posicao: 13
+Tipo: DEL Valor: ] Linha: 0 Posicao: 14
+Tipo: DEL Valor: , Linha: 0 Posicao: 15
+Tipo: IDE Valor: a Linha: 0 Posicao: 18
+Tipo: DEL Valor: [ Linha: 0 Posicao: 18
+Tipo: IDE Valor: s Linha: 0 Posicao: 20
+Tipo: DEL Valor: ] Linha: 0 Posicao: 20
+Tipo: DEL Valor: , Linha: 0 Posicao: 21
+Tipo: IDE Valor: as Linha: 0 Posicao: 25
+Tipo: DEL Valor: [ Linha: 0 Posicao: 25
+Tipo: NRO Valor: 2 Linha: 0 Posicao: 27
+Tipo: DEL Valor: ] Linha: 0 Posicao: 27
+Tipo: DEL Valor: [ Linha: 0 Posicao: 28
+Tipo: NRO Valor: 0 Linha: 0 Posicao: 30
+Tipo: DEL Valor: ] Linha: 0 Posicao: 30
+Tipo: DEL Valor: , Linha: 0 Posicao: 31
+Tipo: IDE Valor: po Linha: 0 Posicao: 35
+Tipo: DEL Valor: [ Linha: 0 Posicao: 35
+Tipo: NRO Valor: 3 Linha: 0 Posicao: 37
+Tipo: DEL Valor: ] Linha: 0 Posicao: 37
+Tipo: DEL Valor: [ Linha: 0 Posicao: 38
+Tipo: NRO Valor: 2 Linha: 0 Posicao: 40
+Tipo: DEL Valor: ] Linha: 0 Posicao: 40
+Tipo: DEL Valor: ) Linha: 0 Posicao: 41
+Tipo: DEL Valor: . Linha: 0 Posicao: 42
+Tipo: DEL Valor: . Linha: 0 Posicao: 43
+Tipo: DEL Valor: . Linha: 0 Posicao: 44
+Tipo: DEL Valor: ; Linha: 0 Posicao: 45
+SEM ERROS LEXICOS
++----------------------+

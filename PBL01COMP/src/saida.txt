@@ -1,47 +1,11 @@
-+--Resultado--+
-Tipo: PRE Valor: const Linha: 0 Posicao: 5
-Tipo: PRE Valor: bool Linha: 0 Posicao: 10
-Tipo: IDE Valor: exemplo Linha: 0 Posicao: 18
-Tipo: IDE Valor: teste Linha: 0 Posicao: 24
-Tipo: DEL Valor: ; Linha: 0 Posicao: 24
-Tipo: DEL Valor: , Linha: 0 Posicao: 25
-Tipo: DEL Valor: ( Linha: 0 Posicao: 26
-Tipo: DEL Valor: ) Linha: 0 Posicao: 27
-Tipo: DEL Valor: [ Linha: 0 Posicao: 28
-Tipo: DEL Valor: ] Linha: 0 Posicao: 29
-Tipo: DEL Valor: { Linha: 0 Posicao: 30
-Tipo: DEL Valor: } Linha: 0 Posicao: 31
-Tipo: DEL Valor: . Linha: 0 Posicao: 32
-Tipo: PRE Valor: float Linha: 2 Posicao: 40
-Tipo: IDE Valor: f Linha: 2 Posicao: 42
-Tipo: REL Valor: = Linha: 2 Posicao: 44
-Tipo: NRO Valor: 3 Linha: 2 Posicao: 46
-Tipo: IDE Valor: a Linha: 2 Posicao: 47
-Tipo: ART Valor: + Linha: 2 Posicao: 48
-Tipo: DEL Valor: ; Linha: 2 Posicao: 48
-Tipo: NRO Valor: 42 Linha: 4 Posicao: 53
-Tipo: IDE Valor: a4a Linha: 4 Posicao: 57
-Tipo: CC Valor: "a23$ \"" Linha: 4 Posicao: 66
-Tipo: REL Valor: != Linha: 6 Posicao: 69
-Tipo: REL Valor: == Linha: 6 Posicao: 71
-Tipo: REL Valor: < Linha: 6 Posicao: 73
-Tipo: REL Valor: <= Linha: 6 Posicao: 74
-Tipo: REL Valor: > Linha: 6 Posicao: 76
-Tipo: REL Valor: >= Linha: 6 Posicao: 77
-Tipo: REL Valor: = Linha: 6 Posicao: 79
-Tipo: ART Valor: + Linha: 6 Posicao: 81
-Tipo: ART Valor: - Linha: 6 Posicao: 82
-Tipo: ART Valor: * Linha: 6 Posicao: 82
-Tipo: ART Valor: / Linha: 6 Posicao: 84
-Tipo: ART Valor: ++ Linha: 6 Posicao: 85
-Tipo: ART Valor: -- Linha: 6 Posicao: 87
-Tipo: LOG Valor: ! Linha: 6 Posicao: 89
-Tipo: LOG Valor: && Linha: 6 Posicao: 90
-Tipo: LOG Valor: || Linha: 6 Posicao: 92
-Tipo: NRO Valor: - 2 Linha: 7 Posicao: 97
-Tipo: IDE Valor: a Linha: 7 Posicao: 100
-
-ERROS LEXICOS
-Tipo: LOG MF Valor: & Linha: 6 Posicao: 80
-Tipo: LOG MF Valor: | Linha: 7 Posicao: 98
-Tipo: SMB IN Valor:  Linha: 7 Posicao: 99
++--Resultado Analisador Sintático--+
+ERROS SINTATICOS
+Erro: Falta ID ou CC (ID OU CADEIA CARACTERES) Linha: 0
+Erro: Falta ID ou CC (ID OU CADEIA CARACTERES) Linha: 0
+Erro: Falta numero Linha: 0
+Erro: Falta numero Linha: 0
+Erro: Falta numero Linha: 0
+Erro: Falta ID ou CC (ID OU CADEIA CARACTERES) Linha: 0
+Erro: Falta delimitador: ; (PONTO E VIRGULA) Linha: 0
+Erro: Falta delimitador: ; (PONTO E VIRGULA) Linha: 0
+Erro: Falta delimitador: ; (PONTO E VIRGULA) Linha: 0
